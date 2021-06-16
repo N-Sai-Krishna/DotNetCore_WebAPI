@@ -1,3 +1,4 @@
+using DotNet_WebApi_Learning.Services.CharacterService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,11 +33,16 @@ namespace DotNet_WebApi_Learning
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DotNet_WebApi_Learning", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(Startup));
+            services.AddSingleton<ICharacterService, CharacterSerice>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
