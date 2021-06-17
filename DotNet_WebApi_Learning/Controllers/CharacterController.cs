@@ -1,14 +1,17 @@
 ﻿using DotNet_WebApi_Learning.Dtos.Character;
 using DotNet_WebApi_Learning.Models;
 using DotNet_WebApi_Learning.Services.CharacterService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DotNet_WebApi_Learning.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CharacterController : ControllerBase
@@ -27,11 +30,15 @@ namespace DotNet_WebApi_Learning.Controllers
             _characterService = characterService;
         }
 
+        //[AllowAnonymous]
         [HttpGet]
         [Route("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<Character>>>> Get()
         {
-            return Ok(await _characterService.GetAllCharacters());
+            //since we use Controllerbase we can get the  user name from the claims which we injected as part of jwt token creation
+            int id = int.Parse(this.User.Claims.FirstOrDefault(s => s.Type == ClaimTypes.NameIdentifier).Value);
+           //so with the help of this id now we can et all the characters related to that particular user
+            return Ok(await _characterService.GetAllCharacters(id));  
         }
 
         [HttpGet("{id}")]

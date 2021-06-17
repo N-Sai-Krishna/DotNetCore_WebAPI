@@ -9,7 +9,7 @@ namespace DotNet_WebApi_Learning.Services.CharacterService
 {
     public interface ICharacterService
     {
-        Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters();
+        Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters(int id);
 
         Task<ServiceResponse<GetCharacterDto>> GetCharacterById(int id);
 
