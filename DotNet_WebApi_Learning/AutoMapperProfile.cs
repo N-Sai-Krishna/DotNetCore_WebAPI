@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using DotNet_WebApi_Learning.Dtos.Character;
+using DotNet_WebApi_Learning.Dtos.Skill;
+using DotNet_WebApi_Learning.Dtos.Weapon;
 using DotNet_WebApi_Learning.Models;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,9 @@ namespace DotNet_WebApi_Learning
         {
             CreateMap<Character, GetCharacterDto>();
             CreateMap<AddCharacterDto, Character>();
+            CreateMap<AddWeaponDto, Weapon>();
+            CreateMap<Weapon,GetWeaponDto>();
+            CreateMap<Skill, GetSkillDto>();
         }
-
     }
 }

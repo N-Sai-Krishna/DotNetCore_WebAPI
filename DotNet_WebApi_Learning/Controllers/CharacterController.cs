@@ -36,9 +36,9 @@ namespace DotNet_WebApi_Learning.Controllers
         public async Task<ActionResult<ServiceResponse<List<Character>>>> Get()
         {
             //since we use Controllerbase we can get the  user name from the claims which we injected as part of jwt token creation
-            int id = int.Parse(this.User.Claims.FirstOrDefault(s => s.Type == ClaimTypes.NameIdentifier).Value);
+            //int id = int.Parse(this.User.Claims.FirstOrDefault(s => s.Type == ClaimTypes.NameIdentifier).Value);
            //so with the help of this id now we can et all the characters related to that particular user
-            return Ok(await _characterService.GetAllCharacters(id));  
+            return Ok(await _characterService.GetAllCharacters());  
         }
 
         [HttpGet("{id}")]
@@ -77,6 +77,19 @@ namespace DotNet_WebApi_Learning.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        [Route("Skill")]
+        public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> AddCharacterSkill(AddCharacterSkillDto newCharacterSkill) 
+        {
+            var response = await _characterService.AddCharacterSkill(newCharacterSkill);
+
+            if (response.Success == false)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
 
     }
 }

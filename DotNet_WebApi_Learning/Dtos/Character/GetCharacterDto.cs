@@ -1,4 +1,6 @@
-﻿using DotNet_WebApi_Learning.Models;
+﻿using DotNet_WebApi_Learning.Dtos.Skill;
+using DotNet_WebApi_Learning.Dtos.Weapon;
+using DotNet_WebApi_Learning.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +17,9 @@ namespace DotNet_WebApi_Learning.Dtos.Character
         public int Defence { get; set; } = 10;
         public int Intelligence { get; set; } = 10;
         public RpgClass Class { get; set; } = RpgClass.Knight;
+
+        public GetWeaponDto Weapon { get; set; }
+
+        public List<GetSkillDto> Skills { get; set; }
     }
 }
