@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DotNet_WebApi_Learning.Dtos.Character;
+using DotNet_WebApi_Learning.Dtos.Fight;
 using DotNet_WebApi_Learning.Dtos.Skill;
 using DotNet_WebApi_Learning.Dtos.Weapon;
 using DotNet_WebApi_Learning.Models;
@@ -19,6 +20,7 @@ namespace DotNet_WebApi_Learning
             CreateMap<AddWeaponDto, Weapon>();
             CreateMap<Weapon,GetWeaponDto>();
             CreateMap<Skill, GetSkillDto>();
+            CreateMap<Character, HighScoreDto>();
         }
     }
 }

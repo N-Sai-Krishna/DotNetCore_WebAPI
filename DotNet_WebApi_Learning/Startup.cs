@@ -1,5 +1,6 @@
 using DotNet_WebApi_Learning.Data;
 using DotNet_WebApi_Learning.Services.CharacterService;
+using DotNet_WebApi_Learning.Services.FightService;
 using DotNet_WebApi_Learning.Services.WeaponService;
 using DotNetWebApi_Learning.Services.WeaponService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -56,6 +57,7 @@ namespace DotNet_WebApi_Learning
             services.AddScoped<ICharacterService, CharacterSerice>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IWeaponService, WeaponService>();
+            services.AddScoped<IFightService, FightService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
