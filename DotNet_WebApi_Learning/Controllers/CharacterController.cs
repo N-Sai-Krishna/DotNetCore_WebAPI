@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DotNet_WebApi_Learning.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Player")]
     [ApiController]
     [Route("[controller]")]
     public class CharacterController : ControllerBase

@@ -69,7 +69,14 @@ namespace DotNet_WebApi_Learning.Controllers
         [Route("Highscore")]
         public async Task<ActionResult<ServiceResponse<List<HighScoreDto>>>> HighScore() 
         {
-            return Ok(await _fightService.GetHighscore());
+            var response = await _fightService.GetHighscore();
+            
+            if(response.Success ==false )
+            {
+                return NotFound(response);    
+            }
+
+            return Ok(response);
         }
     }
 }

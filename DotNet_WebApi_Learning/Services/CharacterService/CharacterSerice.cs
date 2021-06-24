@@ -27,6 +27,7 @@ namespace DotNet_WebApi_Learning.Services.CharacterService
 
         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+        private string GetUserRole() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
         public CharacterSerice(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
@@ -58,7 +59,11 @@ namespace DotNet_WebApi_Learning.Services.CharacterService
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
 
-            var dbCharacters = await _context.Characters.Include(c => c.Skills)
+            var dbCharacters = 
+              GetUserRole().Equals("Admin") ?
+              await _context.Characters.Include(c => c.Skills)
+                            .Include(c => c.Weapon).ToListAsync()
+            : await _context.Characters.Include(c => c.Skills)
                             .Include(c => c.Weapon).Where(s => s.User.Id == GetUserId()).ToListAsync();
 
             serviceResponse.Data = dbCharacters.Select(s => _mapper.Map<GetCharacterDto>(s)).ToList();
